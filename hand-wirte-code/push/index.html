@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>手写-数组push | 前端知识体系构建</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    
+    <meta name="description" content="楚岚博客">
+    
+    <link rel="preload" href="/Chulan-Blog/assets/css/0.styles.b771745a.css" as="style"><link rel="preload" href="/Chulan-Blog/assets/js/app.fcfd34cd.js" as="script"><link rel="preload" href="/Chulan-Blog/assets/js/3.cc92fa6a.js" as="script"><link rel="preload" href="/Chulan-Blog/assets/js/31.ce2f16ad.js" as="script"><link rel="preload" href="/Chulan-Blog/assets/js/16.c7bb5e85.js" as="script"><link rel="prefetch" href="/Chulan-Blog/assets/js/10.7d594c63.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/11.c04ab1a8.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/12.9139256a.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/13.1a856ab2.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/14.c8eeeffb.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/15.10723151.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/17.b08b2728.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/18.82e87477.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/19.97f20673.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/2.81370427.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/20.b583d1f0.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/21.76d8282c.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/22.2320ebe1.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/23.cc713f01.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/24.ed7dfde3.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/25.bd97bf13.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/26.88d2f155.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/27.0b172a03.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/28.8844d1ce.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/29.34342f7b.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/30.2ae3b7e8.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/32.76d45a13.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/33.01600f0d.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/34.9408b45c.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/35.b8db733a.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/36.26701b69.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/37.184637de.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/38.34825831.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/39.3acfc215.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/4.52d892ee.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/40.d2c6c02e.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/41.9278c432.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/42.7e5bf270.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/43.129f1001.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/44.adb528bc.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/45.b6d49f7d.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/46.155f6d85.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/47.90aff817.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/48.81e00989.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/49.fd02399b.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/5.4311ba71.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/50.71b42de0.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/51.d091d8d5.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/52.b982b1d2.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/53.ee514913.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/54.77c07b06.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/6.15ffeb16.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/7.ff19481f.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/8.93b947d5.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/9.c541ee12.js">
+    <link rel="stylesheet" href="/Chulan-Blog/assets/css/0.styles.b771745a.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/Chulan-Blog/" class="home-link router-link-active"><!----> <span class="site-name">前端知识体系构建</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/Chulan-Blog/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/Chulan-Blog/js/base/inherit/" class="nav-link">
+  Js
+</a></div><div class="nav-item"><a href="/Chulan-Blog/engineering/module/" class="nav-link">
+  前端工程化
+</a></div><div class="nav-item"><a href="/Chulan-Blog/hand-wirte-code/promise/" class="nav-link">
+  手写代码
+</a></div><div class="nav-item"><a href="/Chulan-Blog/Http/base/" class="nav-link">
+  计算机网络
+</a></div><div class="nav-item"><a href="/Chulan-Blog/Git/rebase/" class="nav-link">
+  Git
+</a></div><div class="nav-item"><a href="/Chulan-Blog/react-design-principle/overview/know/" class="nav-link">
+  React设计原理
+</a></div><div class="nav-item"><a href="/Chulan-Blog/vue/concept/" class="nav-link">
+  Vue设计与实现笔记
+</a></div><div class="nav-item"><a href="/Chulan-Blog/english/elementary/noun/" class="nav-link">
+  English Grammar
+</a></div><div class="nav-item"><a href="https://github.com/Chulan-824" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/Chulan-Blog/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/Chulan-Blog/js/base/inherit/" class="nav-link">
+  Js
+</a></div><div class="nav-item"><a href="/Chulan-Blog/engineering/module/" class="nav-link">
+  前端工程化
+</a></div><div class="nav-item"><a href="/Chulan-Blog/hand-wirte-code/promise/" class="nav-link">
+  手写代码
+</a></div><div class="nav-item"><a href="/Chulan-Blog/Http/base/" class="nav-link">
+  计算机网络
+</a></div><div class="nav-item"><a href="/Chulan-Blog/Git/rebase/" class="nav-link">
+  Git
+</a></div><div class="nav-item"><a href="/Chulan-Blog/react-design-principle/overview/know/" class="nav-link">
+  React设计原理
+</a></div><div class="nav-item"><a href="/Chulan-Blog/vue/concept/" class="nav-link">
+  Vue设计与实现笔记
+</a></div><div class="nav-item"><a href="/Chulan-Blog/english/elementary/noun/" class="nav-link">
+  English Grammar
+</a></div><div class="nav-item"><a href="https://github.com/Chulan-824" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>手写代码</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/Chulan-Blog/hand-wirte-code/promise/" class="sidebar-link">手写-Promise</a></li><li><a href="/Chulan-Blog/hand-wirte-code/map/" class="sidebar-link">手写-数组map</a></li><li><a href="/Chulan-Blog/hand-wirte-code/reduce/" class="sidebar-link">手写-数组reduce</a></li><li><a href="/Chulan-Blog/hand-wirte-code/push/" aria-current="page" class="active sidebar-link">手写-数组push</a></li><li><a href="/Chulan-Blog/hand-wirte-code/pop/" class="sidebar-link">手写-数组pop</a></li><li><a href="/Chulan-Blog/hand-wirte-code/splice/" class="sidebar-link">手写-数组splice</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="手写-数组push"><a href="#手写-数组push" class="header-anchor">#</a> 手写-数组push</h1> <h2 id="草案分析"><a href="#草案分析" class="header-anchor">#</a> 草案分析</h2> <p>依照 <a href="https://tc39.es/ecma262/#sec-array.prototype.push" target="_blank" rel="noopener noreferrer">ecma262 草案<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>，实现的push的规范如下:</p> <p><img src="/Chulan-Blog/assets/img/1.f2359740.png" alt=""></p> <h2 id="代码实现"><a href="#代码实现" class="header-anchor">#</a> 代码实现</h2> <div class="language-js extra-class"><pre class="language-js"><code><span class="token class-name">Array</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function-variable function">push</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter"><span class="token operator">...</span>items</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> <span class="token constant">O</span> <span class="token operator">=</span> <span class="token function">Object</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">let</span> len <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>length <span class="token operator">&gt;&gt;&gt;</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token keyword">let</span> argCount <span class="token operator">=</span> items<span class="token punctuation">.</span>length <span class="token operator">&gt;&gt;&gt;</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token comment">// 2 ** 53 - 1 为JS能表示的最大正整数</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>len <span class="token operator">+</span> argCount <span class="token operator">&gt;</span> <span class="token number">2</span> <span class="token operator">**</span> <span class="token number">53</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">TypeError</span><span class="token punctuation">(</span><span class="token string">&quot;The number of array is over the max value restricted!&quot;</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> argCount<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token constant">O</span><span class="token punctuation">[</span>len <span class="token operator">+</span> i<span class="token punctuation">]</span> <span class="token operator">=</span> items<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">let</span> newLength <span class="token operator">=</span> len <span class="token operator">+</span> argCount<span class="token punctuation">;</span>
+  <span class="token constant">O</span><span class="token punctuation">.</span>length <span class="token operator">=</span> newLength<span class="token punctuation">;</span>
+  <span class="token keyword">return</span> newLength<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="参考文章"><a href="#参考文章" class="header-anchor">#</a> 参考文章</h2> <p><a href="https://juejin.cn/post/6844903986479251464#heading-25" target="_blank" rel="noopener noreferrer">(建议精读)原生JS灵魂之问(中)，检验自己是否真的熟悉JavaScript？<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <div class="sideTitle" data-v-5c6c915c><div class="title" data-v-5c6c915c>手写-数组push</div> <hr data-v-5c6c915c> <ul data-v-5c6c915c><li class="level-2" data-v-5c6c915c><a href="/Chulan-Blog/hand-wirte-code/push/#草案分析" data-v-5c6c915c>草案分析</a></li><li class="level-2" data-v-5c6c915c><a href="/Chulan-Blog/hand-wirte-code/push/#代码实现" data-v-5c6c915c>代码实现</a></li><li class="level-2" data-v-5c6c915c><a href="/Chulan-Blog/hand-wirte-code/push/#参考文章" data-v-5c6c915c>参考文章</a></li></ul></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/Chulan-Blog/hand-wirte-code/reduce/" class="prev">
+        手写-数组reduce
+      </a></span> <span class="next"><a href="/Chulan-Blog/hand-wirte-code/pop/">
+        手写-数组pop
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/Chulan-Blog/assets/js/app.fcfd34cd.js" defer></script><script src="/Chulan-Blog/assets/js/3.cc92fa6a.js" defer></script><script src="/Chulan-Blog/assets/js/31.ce2f16ad.js" defer></script><script src="/Chulan-Blog/assets/js/16.c7bb5e85.js" defer></script>
+  </body>
+</html>

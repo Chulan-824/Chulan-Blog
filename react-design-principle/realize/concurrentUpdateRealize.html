@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>实现并发更新 | 前端知识体系构建</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    
+    <meta name="description" content="楚岚博客">
+    
+    <link rel="preload" href="/Chulan-Blog/assets/css/0.styles.b771745a.css" as="style"><link rel="preload" href="/Chulan-Blog/assets/js/app.fcfd34cd.js" as="script"><link rel="preload" href="/Chulan-Blog/assets/js/3.cc92fa6a.js" as="script"><link rel="preload" href="/Chulan-Blog/assets/js/34.9408b45c.js" as="script"><link rel="preload" href="/Chulan-Blog/assets/js/16.c7bb5e85.js" as="script"><link rel="prefetch" href="/Chulan-Blog/assets/js/10.7d594c63.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/11.c04ab1a8.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/12.9139256a.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/13.1a856ab2.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/14.c8eeeffb.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/15.10723151.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/17.b08b2728.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/18.82e87477.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/19.97f20673.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/2.81370427.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/20.b583d1f0.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/21.76d8282c.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/22.2320ebe1.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/23.cc713f01.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/24.ed7dfde3.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/25.bd97bf13.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/26.88d2f155.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/27.0b172a03.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/28.8844d1ce.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/29.34342f7b.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/30.2ae3b7e8.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/31.ce2f16ad.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/32.76d45a13.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/33.01600f0d.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/35.b8db733a.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/36.26701b69.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/37.184637de.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/38.34825831.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/39.3acfc215.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/4.52d892ee.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/40.d2c6c02e.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/41.9278c432.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/42.7e5bf270.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/43.129f1001.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/44.adb528bc.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/45.b6d49f7d.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/46.155f6d85.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/47.90aff817.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/48.81e00989.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/49.fd02399b.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/5.4311ba71.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/50.71b42de0.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/51.d091d8d5.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/52.b982b1d2.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/53.ee514913.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/54.77c07b06.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/6.15ffeb16.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/7.ff19481f.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/8.93b947d5.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/9.c541ee12.js">
+    <link rel="stylesheet" href="/Chulan-Blog/assets/css/0.styles.b771745a.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/Chulan-Blog/" class="home-link router-link-active"><!----> <span class="site-name">前端知识体系构建</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/Chulan-Blog/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/Chulan-Blog/js/base/inherit/" class="nav-link">
+  Js
+</a></div><div class="nav-item"><a href="/Chulan-Blog/engineering/module/" class="nav-link">
+  前端工程化
+</a></div><div class="nav-item"><a href="/Chulan-Blog/hand-wirte-code/promise/" class="nav-link">
+  手写代码
+</a></div><div class="nav-item"><a href="/Chulan-Blog/Http/base/" class="nav-link">
+  计算机网络
+</a></div><div class="nav-item"><a href="/Chulan-Blog/Git/rebase/" class="nav-link">
+  Git
+</a></div><div class="nav-item"><a href="/Chulan-Blog/react-design-principle/overview/know/" class="nav-link">
+  React设计原理
+</a></div><div class="nav-item"><a href="/Chulan-Blog/vue/concept/" class="nav-link">
+  Vue设计与实现笔记
+</a></div><div class="nav-item"><a href="/Chulan-Blog/english/elementary/noun/" class="nav-link">
+  English Grammar
+</a></div><div class="nav-item"><a href="https://github.com/Chulan-824" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/Chulan-Blog/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/Chulan-Blog/js/base/inherit/" class="nav-link">
+  Js
+</a></div><div class="nav-item"><a href="/Chulan-Blog/engineering/module/" class="nav-link">
+  前端工程化
+</a></div><div class="nav-item"><a href="/Chulan-Blog/hand-wirte-code/promise/" class="nav-link">
+  手写代码
+</a></div><div class="nav-item"><a href="/Chulan-Blog/Http/base/" class="nav-link">
+  计算机网络
+</a></div><div class="nav-item"><a href="/Chulan-Blog/Git/rebase/" class="nav-link">
+  Git
+</a></div><div class="nav-item"><a href="/Chulan-Blog/react-design-principle/overview/know/" class="nav-link">
+  React设计原理
+</a></div><div class="nav-item"><a href="/Chulan-Blog/vue/concept/" class="nav-link">
+  Vue设计与实现笔记
+</a></div><div class="nav-item"><a href="/Chulan-Blog/english/elementary/noun/" class="nav-link">
+  English Grammar
+</a></div><div class="nav-item"><a href="https://github.com/Chulan-824" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>理念篇</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/Chulan-Blog/react-design-principle/overview/know.html" class="sidebar-link">初识前端框架</a></li><li><a href="/Chulan-Blog/react-design-principle/overview/react-concept.html" class="sidebar-link">React 理念</a></li><li><a href="/Chulan-Blog/react-design-principle/overview/render.html" class="sidebar-link">rendervscode</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>实现篇</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/Chulan-Blog/react-design-principle/realize/init.html" class="sidebar-link">初始化项目</a></li><li><a href="/Chulan-Blog/react-design-principle/realize/jsx.html" class="sidebar-link">实现 JSX</a></li><li><a href="/Chulan-Blog/react-design-principle/realize/reconciler.html" class="sidebar-link">实现 Reconciler 架构</a></li><li><a href="/Chulan-Blog/react-design-principle/realize/update.html" class="sidebar-link">状态更新机制</a></li><li><a href="/Chulan-Blog/react-design-principle/realize/vite.html" class="sidebar-link">vite调试代码</a></li><li><a href="/Chulan-Blog/react-design-principle/realize/hooks.html" class="sidebar-link">实现Hooks架构</a></li><li><a href="/Chulan-Blog/react-design-principle/realize/jest.html" class="sidebar-link">jest 测试调试</a></li><li><a href="/Chulan-Blog/react-design-principle/realize/explorationUpdate.html" class="sidebar-link">初探 Update 流程</a></li><li><a href="/Chulan-Blog/react-design-principle/realize/event.html" class="sidebar-link">实现事件系统</a></li><li><a href="/Chulan-Blog/react-design-principle/realize/diff.html" class="sidebar-link">diff算法</a></li><li><a href="/Chulan-Blog/react-design-principle/realize/fragment.html" class="sidebar-link">Fragment</a></li><li><a href="/Chulan-Blog/react-design-principle/realize/lane.html" class="sidebar-link">实现同步调度流程</a></li><li><a href="/Chulan-Blog/react-design-principle/realize/useEffect.html" class="sidebar-link">实现 useEffect</a></li><li><a href="/Chulan-Blog/react-design-principle/realize/noopRenderer.html" class="sidebar-link">实现noop-renderer</a></li><li><a href="/Chulan-Blog/react-design-principle/realize/concurrentUpdate.html" class="sidebar-link">并发更新原理</a></li><li><a href="/Chulan-Blog/react-design-principle/realize/concurrentUpdateRealize.html" aria-current="page" class="active sidebar-link">实现并发更新</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/Chulan-Blog/react-design-principle/realize/concurrentUpdateRealize.html#扩展交互-优先级" class="sidebar-link">扩展交互(优先级)</a></li><li class="sidebar-sub-header"><a href="/Chulan-Blog/react-design-principle/realize/concurrentUpdateRealize.html#扩展调度阶段" class="sidebar-link">扩展调度阶段</a></li><li class="sidebar-sub-header"><a href="/Chulan-Blog/react-design-principle/realize/concurrentUpdateRealize.html#扩展state计算机制" class="sidebar-link">扩展state计算机制</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/Chulan-Blog/react-design-principle/realize/concurrentUpdateRealize.html#跳过-update-需要考虑的问题" class="sidebar-link">跳过 update 需要考虑的问题</a></li></ul></li></ul></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="实现并发更新"><a href="#实现并发更新" class="header-anchor">#</a> 实现并发更新</h1> <p>要实现并发更新，需要做的改动包括：</p> <ul><li>Lane 模型增加更多优先级</li> <li>交互与优先级对应</li> <li>调度阶段引入 Scheduler，新增调度策略逻辑</li> <li>render 阶段可中断</li> <li>根据 update 计算 state 的算法需要修改</li></ul> <h2 id="扩展交互-优先级"><a href="#扩展交互-优先级" class="header-anchor">#</a> 扩展交互(优先级)</h2> <p>不同交互对应不同优先级，可以根据<code>触发更新的上下文环境</code>赋予不同优先级，比如：</p> <ul><li>点击事件需要同步处理</li> <li>滚动事件优先级再低点</li> <li>useEffect create 回调中触发更新的优先级</li> <li>首屏渲染的优先级</li> <li>...</li></ul> <p>不同的优先级影响不同的 Update 从而影响更新（渲染）</p> <p>不过现在掌握与优先级相关的信息包括：</p> <ul><li>Scheduler 的 5 种优先级</li> <li>React 中的 Lane 模型</li></ul> <p>也就是说，运行流程在 React 时，使用的是 Lane 模型，运行流程在 Scheduler 时，使用的是优先级。所以需要实现两者的转换：</p> <ul><li>lanesToSchedulerPriority</li> <li>schedulerPriorityToLane</li></ul> <h2 id="扩展调度阶段"><a href="#扩展调度阶段" class="header-anchor">#</a> 扩展调度阶段</h2> <p>主要是在同步更新（微任务调度）的基础上扩展并发更新（Scheduler调度），主要包括：</p> <ul><li>将并发原理中的调度策略移到项目中</li> <li>render 阶段变为<strong>可中断</strong></li></ul> <p>梳理两种典型场景：</p> <ul><li>时间切片</li> <li>高优先级更新打断低优先级更新</li></ul> <img src="/Chulan-Blog/assets/img/concurrentUpdateRealize-1.7bff9905.png" class="zoom-custom-imgs"> <h2 id="扩展state计算机制"><a href="#扩展state计算机制" class="header-anchor">#</a> 扩展state计算机制</h2> <p>上文提到不同的 lane 影响不同的 Update 从而影响更新，而每个 Update 又会计算生成 state</p> <p>所以，Update 计算 state 这一环节就会做一下事情：</p> <ul><li>高优先级任务打断低优先级任务时，跳过<strong>优先级不够的 Update</strong></li> <li>保存跳过的 Update</li></ul> <h3 id="跳过-update-需要考虑的问题"><a href="#跳过-update-需要考虑的问题" class="header-anchor">#</a> 跳过 update 需要考虑的问题</h3> <p>比较<strong>优先级是否足够</strong> =&gt; 位运算 &amp; 计算 renderLane 和 LupdateLane</p> <p>如何同时兼顾 <strong>update 的连续性</strong>与 <strong>update 的优先级</strong>？</p> <div class="language-jsx extra-class"><pre class="language-jsx"><code><span class="token comment">// u0</span>
+<span class="token punctuation">{</span>
+  <span class="token function-variable function">action</span><span class="token operator">:</span> <span class="token parameter">num</span> <span class="token operator">=&gt;</span> num <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">lane</span><span class="token operator">:</span> DefaultLane
+<span class="token punctuation">}</span>
+<span class="token comment">// u1</span>
+<span class="token punctuation">{</span>
+  <span class="token literal-property property">action</span><span class="token operator">:</span> <span class="token number">3</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">lane</span><span class="token operator">:</span> SyncLane
+<span class="token punctuation">}</span>
+<span class="token comment">// u2</span>
+<span class="token punctuation">{</span>
+  <span class="token function-variable function">action</span><span class="token operator">:</span> <span class="token parameter">num</span> <span class="token operator">=&gt;</span> num <span class="token operator">+</span> <span class="token number">10</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">lane</span><span class="token operator">:</span> DefaultLane
+<span class="token punctuation">}</span>
+
+<span class="token comment">// state = 0; updateLane = DefaultLane</span>
+<span class="token comment">// 只考虑优先级情况下的结果：11</span>
+<span class="token comment">// 只考虑连续性情况下的结果：13</span>
+</code></pre></div><p>新增 baseState、baseQueue 字段来兼顾 <strong>update 的连续性</strong>与 <strong>update 的优先级</strong></p> <ul><li>baseState 是本次更新参与计算的初始 state，memoizedState 是上次更新计算的最终 state</li> <li>如果本次更新没有 update 被跳过，则下次更新开始时 baseState === memoizedState</li> <li>如果本次更新有 update 被跳过，则本次更新计算出的 memoizedState 为<strong>考虑优先级</strong>情况下计算的结果，baseState 为<strong>最后一个没被跳过的 update 计算后的结果</strong>，下次更新开始时 baseState !== memoizedState</li> <li>本次更新<strong>被跳过的 update 及其后面的所有 update</strong> 都会被保存在 baseQueue 中参与下次 state 计算</li> <li>本次更新<strong>参与计算但保存在 baseQueue 中的 update</strong>，优先级会降低到 NoLane</li></ul> <div class="language-jsx extra-class"><pre class="language-jsx"><code><span class="token comment">// u0</span>
+<span class="token punctuation">{</span>
+  <span class="token function-variable function">action</span><span class="token operator">:</span> <span class="token parameter">num</span> <span class="token operator">=&gt;</span> num <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">lane</span><span class="token operator">:</span> DefaultLane
+<span class="token punctuation">}</span>
+<span class="token comment">// u1</span>
+<span class="token punctuation">{</span>
+  <span class="token literal-property property">action</span><span class="token operator">:</span> <span class="token number">3</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">lane</span><span class="token operator">:</span> SyncLane
+<span class="token punctuation">}</span>
+<span class="token comment">// u2</span>
+<span class="token punctuation">{</span>
+  <span class="token function-variable function">action</span><span class="token operator">:</span> <span class="token parameter">num</span> <span class="token operator">=&gt;</span> num <span class="token operator">+</span> <span class="token number">10</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">lane</span><span class="token operator">:</span> DefaultLane
+<span class="token punctuation">}</span>
+
+<span class="token comment">/*
+* 第一次render
+* baseState = 0; memoizedState = 0; 
+* baseQueue = null; updateLane = DefaultLane;
+* 第一次render 第一次计算 
+* baseState = 1; memoizedState = 1; 
+* baseQueue = null;
+* 第一次render 第二次计算 
+* baseState = 1; memoizedState = 1; 
+* baseQueue = u1;
+* 第一次render 第三次计算 
+* baseState = 1; memoizedState = 11; 
+* baseQueue = u1 -&gt; u2(NoLane);
+*/</span> 
+
+<span class="token comment">/*
+* 第二次render
+* baseState = 1; memoizedState = 11; 
+* baseQueue = u1 -&gt; u2(NoLane); updateLane = SyncLane
+* 第二次render 第一次计算 
+* baseState = 3; memoizedState = 3; 
+* 第二次render 第二次计算 
+* baseState = 13; memoizedState = 13; 
+*/</span> 
+</code></pre></div><p>所以：</p> <ul><li>react 分多次计算，每次计算都可以兼顾优先级，总体计算兼顾连续性</li> <li>中间可能会产生不符合预期的中间状态（只兼顾优先级）</li> <li>react 只能保证结果状态兼顾<strong>连续性</strong>和<strong>优先级</strong></li></ul> <div class="sideTitle" data-v-5c6c915c><div class="title" data-v-5c6c915c>实现并发更新</div> <hr data-v-5c6c915c> <ul data-v-5c6c915c><li class="level-2" data-v-5c6c915c><a href="/Chulan-Blog/react-design-principle/realize/concurrentUpdateRealize.html#扩展交互-优先级-" data-v-5c6c915c>扩展交互(优先级)</a></li><li class="level-2" data-v-5c6c915c><a href="/Chulan-Blog/react-design-principle/realize/concurrentUpdateRealize.html#扩展调度阶段" data-v-5c6c915c>扩展调度阶段</a></li><li class="level-2" data-v-5c6c915c><a href="/Chulan-Blog/react-design-principle/realize/concurrentUpdateRealize.html#扩展state计算机制" data-v-5c6c915c>扩展state计算机制</a></li><li class="level-3" data-v-5c6c915c><a href="/Chulan-Blog/react-design-principle/realize/concurrentUpdateRealize.html#跳过-update-需要考虑的问题" data-v-5c6c915c>跳过 update 需要考虑的问题</a></li></ul></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/Chulan-Blog/react-design-principle/realize/concurrentUpdate.html" class="prev">
+        并发更新原理
+      </a></span> <!----></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/Chulan-Blog/assets/js/app.fcfd34cd.js" defer></script><script src="/Chulan-Blog/assets/js/3.cc92fa6a.js" defer></script><script src="/Chulan-Blog/assets/js/34.9408b45c.js" defer></script><script src="/Chulan-Blog/assets/js/16.c7bb5e85.js" defer></script>
+  </body>
+</html>

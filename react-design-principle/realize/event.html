@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>实现事件系统 | 前端知识体系构建</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    
+    <meta name="description" content="楚岚博客">
+    
+    <link rel="preload" href="/Chulan-Blog/assets/css/0.styles.b771745a.css" as="style"><link rel="preload" href="/Chulan-Blog/assets/js/app.fcfd34cd.js" as="script"><link rel="preload" href="/Chulan-Blog/assets/js/3.cc92fa6a.js" as="script"><link rel="preload" href="/Chulan-Blog/assets/js/21.76d8282c.js" as="script"><link rel="preload" href="/Chulan-Blog/assets/js/16.c7bb5e85.js" as="script"><link rel="prefetch" href="/Chulan-Blog/assets/js/10.7d594c63.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/11.c04ab1a8.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/12.9139256a.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/13.1a856ab2.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/14.c8eeeffb.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/15.10723151.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/17.b08b2728.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/18.82e87477.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/19.97f20673.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/2.81370427.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/20.b583d1f0.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/22.2320ebe1.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/23.cc713f01.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/24.ed7dfde3.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/25.bd97bf13.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/26.88d2f155.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/27.0b172a03.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/28.8844d1ce.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/29.34342f7b.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/30.2ae3b7e8.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/31.ce2f16ad.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/32.76d45a13.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/33.01600f0d.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/34.9408b45c.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/35.b8db733a.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/36.26701b69.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/37.184637de.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/38.34825831.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/39.3acfc215.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/4.52d892ee.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/40.d2c6c02e.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/41.9278c432.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/42.7e5bf270.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/43.129f1001.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/44.adb528bc.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/45.b6d49f7d.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/46.155f6d85.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/47.90aff817.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/48.81e00989.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/49.fd02399b.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/5.4311ba71.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/50.71b42de0.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/51.d091d8d5.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/52.b982b1d2.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/53.ee514913.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/54.77c07b06.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/6.15ffeb16.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/7.ff19481f.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/8.93b947d5.js"><link rel="prefetch" href="/Chulan-Blog/assets/js/9.c541ee12.js">
+    <link rel="stylesheet" href="/Chulan-Blog/assets/css/0.styles.b771745a.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/Chulan-Blog/" class="home-link router-link-active"><!----> <span class="site-name">前端知识体系构建</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/Chulan-Blog/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/Chulan-Blog/js/base/inherit/" class="nav-link">
+  Js
+</a></div><div class="nav-item"><a href="/Chulan-Blog/engineering/module/" class="nav-link">
+  前端工程化
+</a></div><div class="nav-item"><a href="/Chulan-Blog/hand-wirte-code/promise/" class="nav-link">
+  手写代码
+</a></div><div class="nav-item"><a href="/Chulan-Blog/Http/base/" class="nav-link">
+  计算机网络
+</a></div><div class="nav-item"><a href="/Chulan-Blog/Git/rebase/" class="nav-link">
+  Git
+</a></div><div class="nav-item"><a href="/Chulan-Blog/react-design-principle/overview/know/" class="nav-link">
+  React设计原理
+</a></div><div class="nav-item"><a href="/Chulan-Blog/vue/concept/" class="nav-link">
+  Vue设计与实现笔记
+</a></div><div class="nav-item"><a href="/Chulan-Blog/english/elementary/noun/" class="nav-link">
+  English Grammar
+</a></div><div class="nav-item"><a href="https://github.com/Chulan-824" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/Chulan-Blog/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/Chulan-Blog/js/base/inherit/" class="nav-link">
+  Js
+</a></div><div class="nav-item"><a href="/Chulan-Blog/engineering/module/" class="nav-link">
+  前端工程化
+</a></div><div class="nav-item"><a href="/Chulan-Blog/hand-wirte-code/promise/" class="nav-link">
+  手写代码
+</a></div><div class="nav-item"><a href="/Chulan-Blog/Http/base/" class="nav-link">
+  计算机网络
+</a></div><div class="nav-item"><a href="/Chulan-Blog/Git/rebase/" class="nav-link">
+  Git
+</a></div><div class="nav-item"><a href="/Chulan-Blog/react-design-principle/overview/know/" class="nav-link">
+  React设计原理
+</a></div><div class="nav-item"><a href="/Chulan-Blog/vue/concept/" class="nav-link">
+  Vue设计与实现笔记
+</a></div><div class="nav-item"><a href="/Chulan-Blog/english/elementary/noun/" class="nav-link">
+  English Grammar
+</a></div><div class="nav-item"><a href="https://github.com/Chulan-824" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>理念篇</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/Chulan-Blog/react-design-principle/overview/know.html" class="sidebar-link">初识前端框架</a></li><li><a href="/Chulan-Blog/react-design-principle/overview/react-concept.html" class="sidebar-link">React 理念</a></li><li><a href="/Chulan-Blog/react-design-principle/overview/render.html" class="sidebar-link">rendervscode</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>实现篇</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/Chulan-Blog/react-design-principle/realize/init.html" class="sidebar-link">初始化项目</a></li><li><a href="/Chulan-Blog/react-design-principle/realize/jsx.html" class="sidebar-link">实现 JSX</a></li><li><a href="/Chulan-Blog/react-design-principle/realize/reconciler.html" class="sidebar-link">实现 Reconciler 架构</a></li><li><a href="/Chulan-Blog/react-design-principle/realize/update.html" class="sidebar-link">状态更新机制</a></li><li><a href="/Chulan-Blog/react-design-principle/realize/vite.html" class="sidebar-link">vite调试代码</a></li><li><a href="/Chulan-Blog/react-design-principle/realize/hooks.html" class="sidebar-link">实现Hooks架构</a></li><li><a href="/Chulan-Blog/react-design-principle/realize/jest.html" class="sidebar-link">jest 测试调试</a></li><li><a href="/Chulan-Blog/react-design-principle/realize/explorationUpdate.html" class="sidebar-link">初探 Update 流程</a></li><li><a href="/Chulan-Blog/react-design-principle/realize/event.html" aria-current="page" class="active sidebar-link">实现事件系统</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/Chulan-Blog/react-design-principle/realize/event.html#实现-reactdom-与-reconciler-对接" class="sidebar-link">实现 ReactDOM 与 Reconciler 对接</a></li><li class="sidebar-sub-header"><a href="/Chulan-Blog/react-design-principle/realize/event.html#模拟实现浏览器事件流程" class="sidebar-link">模拟实现浏览器事件流程</a></li></ul></li><li><a href="/Chulan-Blog/react-design-principle/realize/diff.html" class="sidebar-link">diff算法</a></li><li><a href="/Chulan-Blog/react-design-principle/realize/fragment.html" class="sidebar-link">Fragment</a></li><li><a href="/Chulan-Blog/react-design-principle/realize/lane.html" class="sidebar-link">实现同步调度流程</a></li><li><a href="/Chulan-Blog/react-design-principle/realize/useEffect.html" class="sidebar-link">实现 useEffect</a></li><li><a href="/Chulan-Blog/react-design-principle/realize/noopRenderer.html" class="sidebar-link">实现noop-renderer</a></li><li><a href="/Chulan-Blog/react-design-principle/realize/concurrentUpdate.html" class="sidebar-link">并发更新原理</a></li><li><a href="/Chulan-Blog/react-design-principle/realize/concurrentUpdateRealize.html" class="sidebar-link">实现并发更新</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="实现事件系统"><a href="#实现事件系统" class="header-anchor">#</a> 实现事件系统</h1> <p>事件系统本质上植根于浏览器事件模型，所以他隶属于 ReactDOM，在实现时要做到对Reconciler 0侵入。</p> <p>实现事件系统需要考虑：</p> <ul><li>模拟实现浏览器事件捕获、冒泡流程</li> <li>实现合成事件对象</li> <li>方便后续扩展(不同事件，不同优先级)</li></ul> <h2 id="实现-reactdom-与-reconciler-对接"><a href="#实现-reactdom-与-reconciler-对接" class="header-anchor">#</a> 实现 ReactDOM 与 Reconciler 对接</h2> <p>将事件回调保存在 DOM 中，通过以下两个时机对接：</p> <ul><li>创建DOM时</li> <li>更新属性时</li></ul> <h2 id="模拟实现浏览器事件流程"><a href="#模拟实现浏览器事件流程" class="header-anchor">#</a> 模拟实现浏览器事件流程</h2> <img src="/Chulan-Blog/assets/img/event-1.6d08dcc8.png" class="zoom-custom-imgs"> <img src="/Chulan-Blog/assets/img/event-2.3a6edc85.png" class="zoom-custom-imgs"> <div class="sideTitle" data-v-5c6c915c><div class="title" data-v-5c6c915c>实现事件系统</div> <hr data-v-5c6c915c> <ul data-v-5c6c915c><li class="level-2" data-v-5c6c915c><a href="/Chulan-Blog/react-design-principle/realize/event.html#实现-reactdom-与-reconciler-对接" data-v-5c6c915c>实现 ReactDOM 与 Reconciler 对接</a></li><li class="level-2" data-v-5c6c915c><a href="/Chulan-Blog/react-design-principle/realize/event.html#模拟实现浏览器事件流程" data-v-5c6c915c>模拟实现浏览器事件流程</a></li></ul></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/Chulan-Blog/react-design-principle/realize/explorationUpdate.html" class="prev">
+        初探 Update 流程
+      </a></span> <span class="next"><a href="/Chulan-Blog/react-design-principle/realize/diff.html">
+        diff算法
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/Chulan-Blog/assets/js/app.fcfd34cd.js" defer></script><script src="/Chulan-Blog/assets/js/3.cc92fa6a.js" defer></script><script src="/Chulan-Blog/assets/js/21.76d8282c.js" defer></script><script src="/Chulan-Blog/assets/js/16.c7bb5e85.js" defer></script>
+  </body>
+</html>
